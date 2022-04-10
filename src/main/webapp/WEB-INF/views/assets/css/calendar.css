@@ -1,0 +1,48 @@
+
+body {
+  background: rgb(227, 231, 233);
+}
+
+.air-calendar .calendar-item {
+  min-width: 300px;
+}
+
+.active-border {
+  border-left: 4px solid rgb(35, 224, 76);
+}
+
+.list-group-item-action span.badge {
+  font-size: 10px;
+}
+
+.list-group-item-action span.badge {
+  font-size: 10px;
+}
+
+.list-group-item-action .item-author {
+  font-size: 12px;
+}
+.list-group-item-action .item-author span {
+  font-family: "Poppins", sans-serif;
+}
+
+.list-group-item-action .item-title {
+  font-family: "Poppins", sans-serif;
+}
+
+.calendar-item ul a{
+  transition: box-shadow .15s ease-in-out;
+}
+.calendar-item ul a:hover {
+  box-shadow: inset 0 -50px 0 0px #cff0a9;
+}
+
+.jumbotron {
+  background: rgb(34, 34, 34);
+  padding-block: 50px;
+  border-radius: 0;
+}
+.jumbotron h2 {
+  font-size: x-large;
+  color: white;
+}
