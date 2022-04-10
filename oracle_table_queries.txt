@@ -1,0 +1,127 @@
+------user table----------------------------------
+
+CREATE SEQUENCE user_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE users (
+	id NUMBER(10),
+	first_name VARCHAR2(20) NOT NULL,
+	last_name VARCHAR2(20) NOT NULL,
+	email VARCHAR2(50) NOT NULL,
+	mobile VARCHAR2(10) NOT NULL,
+	gender CHAR(1) NOT NULL,
+	password VARCHAR2(200) NOT NULL,
+	user_role NUMBER(1) NOT NULL,
+	created_at DATE NOT NULL,
+	CONSTRAINT users_pk PRIMARY KEY (id),
+	CONSTRAINT users_email_uk UNIQUE (email),
+	CONSTRAINT users_mobile_uk UNIQUE (mobile)
+);
+
+CREATE OR REPLACE TRIGGER user_seq_trig
+	BEFORE INSERT ON users FOR EACH ROW
+	WHEN (NEW.id IS NULL)
+BEGIN
+	SELECT user_seq.NEXTVAL INTO :NEW.id FROM DUAL;
+END;
+
+
+INSERT INTO users (first_name, last_name, email, mobile, gender, password, user_role, created_at ) VALUES ('admin', 'user', 'admin@hcl.com', '0761234567', 'M',  'admin123', 1, SYSDATE);
+
+
+-----user role table------------------------------------------
+
+CREATE SEQUENCE user_role_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE user_roles (
+	role_id VARCHAR2(10) NOT NULL,
+	username VARCHAR2(20) NOT NULL,
+	type VARCHAR2(20) NOT NULL,
+	CONSTRAINT user_role_pk PRIMARY KEY (role_id),
+	CONSTRAINT user_role_uk UNIQUE (username, type),
+	CONSTRAINT user_role_fk FOREIGN KEY (username) REFERENCES users(email)
+);
+
+CREATE OR REPLACE TRIGGER user_role_seq_trig
+	BEFORE INSERT ON user_roles FOR EACH ROW
+	WHEN (NEW.role_id IS NULL)
+BEGIN
+	SELECT user_seq.NEXTVAL INTO :NEW.role_id FROM DUAL;
+END;
+
+
+INSERT INTO user_roles (username, type) VALUES ('admin@hcl.com', 'ROLE_ADMIN');
+
+
+
+---------- post table -----------------------------------------------
+
+CREATE SEQUENCE post_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE posts (
+	post_id VARCHAR2(10) NOT NULL,
+	title VARCHAR2(200) NOT NULL,
+	content LONG NOT NULL,
+	category VARCHAR2(50) NOT NULL,
+	sub_category VARCHAR2(50) NOT NULL,
+	cover VARCHAR2(200),
+	author NUMBER(10) NOT NULL,
+	likes NUMBER DEFAULT 0,
+	views NUMBER DEFAULT 0,
+	has_airdate CHAR(1),
+	airdate DATE,
+	created_at DATE NOT NULL,
+	CONSTRAINT posts_pk PRIMARY KEY (post_id),
+	CONSTRAINT posts_title_uk UNIQUE (title)
+);
+
+CREATE OR REPLACE TRIGGER post_seq_trig
+	BEFORE INSERT ON posts FOR EACH ROW
+	WHEN (NEW.post_id IS NULL)
+BEGIN
+	SELECT post_seq.NEXTVAL INTO :NEW.post_id FROM DUAL;
+END;
+
+
+
+--------- calandar table ---------------------------------------------
+
+CREATE SEQUENCE calendar_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE calendar (
+	id NUMBER(10) NOT NULL,
+	title VARCHAR2(200) NOT NULL,
+	category VARCHAR2(50) NOT NULL,
+	sub_category VARCHAR2(50) NOT NULL,
+	author VARCHAR2(50) NOT NULL,
+	post_id NUMBER(10) NOT NULL,
+	month NUMBER NOT NULL,
+	year NUMBER NOT NULL,
+	CONSTRAINT calendar_pk PRIMARY KEY (id)
+);
+
+CREATE OR REPLACE TRIGGER calendar_seq_trig
+	BEFORE INSERT ON calendar FOR EACH ROW
+	WHEN (NEW.id IS NULL)
+BEGIN
+	SELECT calendar_seq.NEXTVAL INTO :NEW.id FROM DUAL;
+END;
+
+
+-------- comment table ----------------------------------------------
+
+CREATE SEQUENCE comments_seq START WITH 1 INCREMENT BY 1;
+
+CREATE TABLE comments (
+	id NUMBER(10) NOT NULL,
+	message VARCHAR2(200) NOT NULL,
+	post_id NUMBER(10) NOT NULL,
+	commenter VARCHAR2(100) NOT NULL,
+	CONSTRAINT comments_pk PRIMARY KEY (id)
+);
+
+CREATE OR REPLACE TRIGGER comments_seq_trig
+	BEFORE INSERT ON comments FOR EACH ROW
+	WHEN (NEW.id IS NULL)
+BEGIN
+	SELECT comments_seq.NEXTVAL INTO :NEW.id FROM DUAL;
+END;
