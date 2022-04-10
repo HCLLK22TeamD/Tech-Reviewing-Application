@@ -128,9 +128,9 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	
-	public Boolean deleteUser(String username) {
-		String query = "DELETE FROM users WHERE email = ?";
-		int result = jdbcTemplate.update(query, username);
+	public Boolean deleteUser(int id) {
+		String query = "DELETE FROM users WHERE id = ?";
+		int result = jdbcTemplate.update(query, id);
 		if(result > 0) {
 			return true;
 		}else {

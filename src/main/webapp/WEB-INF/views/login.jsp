@@ -68,7 +68,7 @@
                             </div>       
                         </div>
                                                    
-                        <c:if test="${not empty errorMsg}"><div class="alert alert-danger alert-dismissible py-1 pull-left mt-3">${errorMsg}</div></c:if>
+                        <c:if test="${not empty errorMsg}"><div class="alert alert-danger alert-dismissible py-1 mt-3">${errorMsg}</div></c:if>
                       
 
                         <p class="row col-md-12 mt-4 justify-content-center small fw-bold mt-2 pt-1 mb-0 text-center">Don't have an account? <a href="<%=request.getContextPath() %>/user/register"

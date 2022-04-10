@@ -19,12 +19,15 @@
 	<%@include file="header.jsp"%>
 	
 	
-	<div class="jumbotron mb-3">
+	<div class="jumbotron mb-3 bg-dark">
         <h2 class="row justify-content-center lead"><i class="fa fa-calendar-o pr-3 pt-1"></i> Air-Dates Tech Calendar</h2>
     </div>
 
     <div class="container-fluid row air-calendar">
 
+		<c:if test="${empty calendar}">
+			<div class="row justify-content-center col-md-12 lead">There is no any AirDate yet.</div>
+		</c:if>
 
 	    <c:forEach var="month" items="${calendar}">	
 	    	

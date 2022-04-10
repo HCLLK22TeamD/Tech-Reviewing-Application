@@ -17,17 +17,17 @@
 
 
 	<section class="mb-5">
-		<div class="card bg-light">
+		<div class="card bg-white">
 			<div class="card-body">
 			
 				<c:if test="${not empty param['commnetErrorMsg']}">
-	        		<div class="alert alert-danger alert-dismissible py-1 pull-left mt-3">${param['commnetErrorMsg']}</div>
+	        		<div class="alert alert-danger alert-dismissible py-1">WARNING: ${param['commnetErrorMsg']}</div>
 	        	</c:if>
 			
 				<form:form modelAttribute="comment" method="post" class="mb-4">
-					<form:textarea path="message" class="form-control" rows="3" placeholder="Leave a comment!"></form:textarea>
+					<form:textarea path="message" class="form-control border-primary" rows="3" placeholder="Leave a comment!"></form:textarea>
 					<form:input path="postId" type="hidden" id="postId" name="postId" value="${param['id']}" />
-					<button type="submit" class="btn btn-primary btn-sm shadow border-1 rounded-0 float-right my-2">Send</button>
+					<button type="submit" class="btn btn-primary px-4 btn-sm shadow border-1 rounded-0 float-right my-2">Send</button>
                                	
 				</form:form>
 				

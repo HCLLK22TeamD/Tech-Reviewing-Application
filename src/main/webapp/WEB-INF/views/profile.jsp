@@ -116,7 +116,7 @@
 		
 		                        <div class="row justify-content-end mt-2">
 		                        	<div class="text-lg-start mr-3">
-		                             	<button type="submit" class="btn btn-danger btn rounded-0" style="padding-left: 2.5rem; padding-right: 2.5rem;">Delete Account</button>
+		                             	<a href="<%=request.getContextPath() %>/user/profile/delete?id=${user.id}" class="btn btn-danger btn rounded-0" style="padding-left: 2.5rem; padding-right: 2.5rem;">Delete Account</a>
 		                             </div>
 		                             <div class="text-lg-start mr-3">
 		                             	<button type="submit" class="btn btn-primary btn rounded-0" style="padding-left: 2.5rem; padding-right: 2.5rem;">Update</button>
@@ -126,8 +126,36 @@
                         
                     		</form:form>
                     		
-                    		<c:if test="${not empty errorMsg}"><div class="alert alert-danger alert-dismissible py-1 pull-left mt-3">${errorMsg}</div></c:if>
-                    		<c:if test="${not empty successMsg}"><div class="alert alert-success alert-dismissible py-1 pull-left mt-3">${successMsg}</div></c:if>
+                    		<c:if test="${not empty errorMsg}"><div class="alert alert-danger alert-dismissible py-1 mt-3">${errorMsg}</div></c:if>
+                    		<c:if test="${not empty successMsg}"><div class="alert alert-success alert-dismissible py-1 mt-3">${successMsg}</div></c:if>
+                    		
+                    		
+                    		<div class="container">
+	                            <div class="row">
+	                                <div class="modal fade " id="successModel" role="dialog">
+	                                    <div class="modal-dialog">
+	                                        <div class="modal-content">
+	                                            <div class="modal-header">
+	                                                <span class="font-weight-normal">TechZone - User Profile</span>
+	                                                <button type="button" class="close" data-dismiss="modal" aria-label=""><span>×</span></button>
+	                                             </div>
+	                                            
+	                                            <div class="modal-body">
+	                                               
+	                                                <div class="row justify-content-center">
+	                                                    <img class="row col-md-3" src="/recources/img/green-tick.png" alt="">
+	                                                    <h1 class="col-md-12 text-center">Done!</h1>
+	                                                    <p>${successMsg}</p>
+	                                                 </div>
+	                                                 
+	                                            </div>
+	                                            
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+                    		
                       
 							
 						</div>
@@ -140,6 +168,15 @@
 
 
 	<%@include file="footer.jsp"%>
+	
+	<c:if test="${not empty successMsg}">
+		<script type="text/javascript">
+		    $(document).ready(function(){
+		    	$('#successModel').modal('show')
+		    });
+		</script>
+	</c:if>
+	
 
 </body>
 </html>

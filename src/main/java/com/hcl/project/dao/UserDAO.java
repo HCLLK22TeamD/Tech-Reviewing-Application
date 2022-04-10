@@ -19,7 +19,7 @@ public interface UserDAO  {
 	
 	Boolean updateUser(User user);
 	
-	Boolean deleteUser(String username);
+	Boolean deleteUser(int id);
 	
 	
 	
