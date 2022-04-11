@@ -17,11 +17,12 @@ Also users can see upcomming Air-Dates about specific technology or gadget or pr
 #### Routes
 
 /home - home page <br>
+/calendar - Airdates calendar page <br>
 /user/login - login page <br>
 /user/register - registration interface <br>
-/user/profile - user account page <br>
+/user/profile - user account page <br><br>
 /posts/new-post - creat a post <br>
-/posts/manage - manage published posts <br><br>
+/posts/manage - manage published posts <br>
 /posts/update?id={id} - update specific post <br>
 /posts/delete?id={id} - delete specifc post <br>
 /posts/view?id={id} - view specifc post <br>
@@ -31,6 +32,6 @@ Also users can see upcomming Air-Dates about specific technology or gadget or pr
 
 * Step1 - Download or clone the project
 * Step2 - import the project on Eclipse IDE by navigating file -> Open project file system
-* Step2 - update the project dependancies by navigating (right click on project folder -> maven -> update)
-* Step3 - configure the tomcat server(v9) by navigating project build path
-* Step4 - finaly run the project by right click project -> run as -> run on server
+* Step3 - update the project dependancies by navigating (right click on project folder -> maven -> update)
+* Step4 - configure the tomcat server(v9) by navigating project build path
+* Step5 - finaly run the project by right click project -> run as -> run on server
