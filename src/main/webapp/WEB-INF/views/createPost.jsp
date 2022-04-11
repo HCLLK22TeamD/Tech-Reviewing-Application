@@ -122,9 +122,9 @@
                                             <div class="modal-body">
                                                
                                                 <div class="row justify-content-center">
-                                                    <img class="row col-md-3" src="./assets/img/green-tick.png" alt="">
+                                                    <img class="row col-md-3" src="/resources/img/green-tick.png" alt="">
                                                     <h1 class="col-md-12 text-center">Done!</h1>
-                                                    <p>Your Post is successfully submited.</p>
+                                                    <p>Your Post is successfully submitted.</p>
                                                  </div>
                                                  
                                             </div>

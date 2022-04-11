@@ -25,7 +25,7 @@
         <div class="row justify-content-center">
         
         	<c:if test="${not empty errorMsg}">
-        		<div class="alert alert-danger alert-dismissible py-1 pull-left mt-3">${errorMsg}</div>
+        		<div class="col-md-8 alert alert-danger alert-dismissible py-1 pull-left mt-3">WARNING: ${errorMsg}</div>
         	</c:if>
         
 	       <c:if test="${not empty post}">
@@ -33,10 +33,10 @@
 	            <div class="col-lg-8">
 	                <article>
 	                    <header class="mb-4">
-	                        <h1 class="fw-bolder mb-1">${post.title}</h1>
+	                        <h1 class="fw-bolder mb-1 ">${post.title}</h1>
 	                        <div class="small text-muted mb-2">Posted on ${post.createdAt} by ${author}</div>
-	                        <a class="badge badge-primary shadow rounded-0 py-2 text-decoration-none link-light" href="#!">${post.category}</a>
-	                        <a class="badge badge-warning shadow rounded-0 py-2 text-decoration-none link-light" href="#!">${post.subCategory}</a>
+	                        <a class="badge badge-primary shadow rounded-0 py-2 px-2 text-decoration-none link-light text-uppercase" href="#!">${post.category}</a>
+	                        <a class="badge badge-warning shadow rounded-0 py-2 px-2 text-decoration-none link-light text-uppercase" href="#!">${post.subCategory}</a>
 	                    </header>
 	                    
 	                    <figure class="mb-4"><img class="img-fluid rounded-0 shadow-sm"

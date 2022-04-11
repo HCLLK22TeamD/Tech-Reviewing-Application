@@ -27,50 +27,50 @@
 
 		<h2 class="ml-5 pl-5 mb-4 lead">Highlights</h2>
 
-		<div class="row ">
-
-			<div
-				class="col-lg-6 col-md-12 col-sm-12 d-flex justify-content-center">
-				<div class="post post-thumb">
-					<a class="post-img" href="<%=request.getContextPath() %>/post"><img src="<c:url value="/resources/img/cover1.jpg" />"
-						alt="header-post" data-pagespeed-url-hash="67351088"
-						onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-					</a>
-					<div class="post-body">
-						<h3 class="highlights post-title">
-							<a href="<%=request.getContextPath() %>/post">Lorem Ipsum is simply dummy text of the printing
-								and typesetting industry.</a>
-						</h3>
-						<div class="post-meta">
-							<a class="post-category cat-2" href="#">category</a> <span
-								class="post-date pull-right">March 27, 2018</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div
-				class="col-lg-6 col-md-12 col-sm-12 d-flex justify-content-center">
-				<div class="post post-thumb">
-					<a class="post-img" href="<%=request.getContextPath() %>/post"><img src="<c:url value="/resources/img/cover5.jpg" />"
-						alt="header-post" data-pagespeed-url-hash="67351088"
-						onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
-					</a>
-					<div class="post-body">
-						<h3 class="highlights post-title">
-							<a href="<%=request.getContextPath() %>/post">Lorem Ipsum is simply dummy text of the printing
-								and typesetting industry.</a>
-						</h3>
-						<div class="post-meta">
-							<a class="post-category cat-2" href="#">category</a> <span
-								class="post-date pull-right">March 27, 2018</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
+		
+		<div class="row justify-content-end posts-slider mr-2">
+	      <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+	        <ol class="carousel-indicators">
+	          <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+	          <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+	          <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+	        </ol>
+	        <div class="carousel-inner">
+	          
+	          <div class="carousel-item active">
+	            <div class="post post-thumb">
+	                <a class="post-img" href="<%=request.getContextPath() %>/posts/view?id=1">
+	                  <img src="<c:url value="/resources/img/cover1.jpg" />" alt="header-post">
+	                </a>
+	                <div class="post-body">
+	                  <h3 class="highlights post-title">
+	                    <a href="<%=request.getContextPath() %>/post">
+	                      Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a>
+	                  </h3>
+	                  <div class="post-meta">
+	                    <a class="post-category cat-2" href="#">category</a>
+	                    <span class="post-date pull-right">March 27, 2018</span>
+	                  </div>
+	                </div>
+	            </div>
+	          </div>
+	
+	        </div>
+	        
+	        <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+	          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	          <span class="sr-only">Previous</span>
+	        </a>
+	        <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+	          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	          <span class="sr-only">Next</span>
+	        </a>
+	      </div>
+	   </div>
+	    
+	
 	</div>
+
 
 
 

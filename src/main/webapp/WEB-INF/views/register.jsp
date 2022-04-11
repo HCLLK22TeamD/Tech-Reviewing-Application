@@ -108,8 +108,8 @@
                             </div>
                         </div>
                         
-                        <div class="row col-md-12">
-                        	<c:if test="${not empty errorMsg}"><div class="alert alert-danger alert-dismissible py-1 my-2 mr-3">${errorMsg}</div></c:if>
+                        <div class="row col-12">
+                        	<c:if test="${not empty errorMsg}"><div class="alert alert-danger alert-dismissible py-1 my-2">${errorMsg}</div></c:if>
                 			<c:if test="${not empty successMsg}"><div class="alert alert-success alert-dismissible py-1 my-2">${successMsg}</div></c:if>
                   		</div>
                         
@@ -145,8 +145,8 @@
                                         <div class="modal-body">
                                            
                                             <div class="row justify-content-center">
-                                                <img class="row col-md-3" src="./assets/img/green-tick.png" alt="">
-                                                <h1 class="col-md-12 text-center">Congradulations!</h1>
+                                                <img class="row col-md-3" src="/resources/img/green-tick.png" alt="">
+                                                <h1 class="col-md-12 text-center">Congrats!</h1>
                                                 <p><c:if test="${not empty successMsg}">${successMsg}</c:if></p>
                                                 <p><a href="<%=request.getContextPath() %>/user/login" class="link-danger">Login Here</a></p>
                                              </div>

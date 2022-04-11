@@ -1,6 +1,7 @@
 package com.hcl.project.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -24,40 +25,6 @@ public class UserController {
 	@Autowired
 	private UserDAO userDAO;
 	
-	
-	@GetMapping("/profile")
-	public ModelAndView showProfile(ModelAndView model, HttpSession session) {
-		model.setViewName("profile");
-		
-		User currentUser = (User) session.getAttribute("user");
-		if(currentUser != null) {
-			model.addObject("user", currentUser);
-		}else {
-			model.setViewName("login");
-			model.addObject("errorMsg", "Session out, please login again.");
-		}	
-		return model;
-	}
-	
-	@PostMapping("/profile")
-	public ModelAndView updateProfile(@ModelAttribute("user") User user, ModelAndView model) {
-		model.setViewName("profile");
-		
-		try {
-			boolean success = userDAO.updateUser(user);
-			if(success) {
-				model.addObject("successMsg", "Your profile successfully updated.");
-			}else {
-				model.addObject("errorMsg", "profile updating failed.");
-			}
-			
-		} catch (Exception e) {
-			System.out.println(">> ERROR: "+e.getMessage());
-			model.addObject("errorMsg", e.getLocalizedMessage());
-		}
-		return model;
-	}
-
 
 	@GetMapping("/register")
 	public ModelAndView showRegisterPage(User user, ModelAndView model) {
@@ -146,4 +113,51 @@ public class UserController {
 		return "redirect:/user/login";
 	}
 
+	
+	@GetMapping("/profile")
+	public ModelAndView showProfile(ModelAndView model, HttpSession session) {
+		model.setViewName("profile");
+		
+		User currentUser = (User) session.getAttribute("user");
+		if(currentUser != null) {
+			model.addObject("user", currentUser);
+		}else {
+			model.setViewName("login");
+			model.addObject("errorMsg", "Session out, please login again.");
+		}	
+		return model;
+	}
+	
+	@PostMapping("/profile")
+	public ModelAndView updateProfile(@ModelAttribute("user") User user, ModelAndView model) {
+		model.setViewName("profile");
+		
+		try {
+			boolean success = userDAO.updateUser(user);
+			if(success) {
+				model.addObject("successMsg", "Your profile successfully updated.");
+			}else {
+				model.addObject("errorMsg", "profile updating failed.");
+			}
+			
+		} catch (Exception e) {
+			System.out.println(">> ERROR: "+e.getMessage());
+			model.addObject("errorMsg", e.getLocalizedMessage());
+		}
+		return model;
+	}
+	
+	@RequestMapping("/profile/delete")
+	public ModelAndView deleteProfile(@RequestParam int id, ModelAndView model, HttpSession session) {
+		try {
+			userDAO.deleteUser(id);
+			session.invalidate();
+			model.setViewName("login");
+			
+		}catch (Exception e) {
+			model.setViewName("redirect:/user/profile");
+			model.addObject("errorMsg", "Account deleting failed. "+e.getLocalizedMessage());
+		}
+		return model;
+	}
 }

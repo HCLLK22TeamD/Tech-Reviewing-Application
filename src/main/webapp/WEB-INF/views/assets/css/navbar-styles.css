@@ -8,7 +8,7 @@
     /* padding-block: 18px; */
     padding-block: 4px;
     padding-inline: 10px;
-    font-size: large;
+    font-size: medium;
   }
   .navbar-right li{
     transition: box-shadow .20s ease-in-out;
