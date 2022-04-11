@@ -27,3 +27,10 @@ Also users can see upcomming Air-Dates about specific technology or gadget or pr
 /posts/view?id={id} - view specifc post <br>
 
 
+### How To Run
+
+* Step1 - Download or clone the project
+* Step2 - import the project on Eclipse IDE by navigating file -> Open project file system
+* Step2 - update the project dependancies by navigating (right click on project folder -> maven -> update)
+* Step3 - configure the tomcat server(v9) by navigating project build path
+* Step4 - finaly run the project by right click project -> run as -> run on server
