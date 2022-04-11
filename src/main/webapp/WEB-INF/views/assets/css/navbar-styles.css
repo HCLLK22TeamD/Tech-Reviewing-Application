@@ -1,14 +1,14 @@
   /* navbar styles */
 
   .navbar-brand {
-    font-size: large;
+    font-size: x-large;
   } 
   .navbar-nav li {
     border-inline-start: 1px solid #dee2e6;
     /* padding-block: 18px; */
     padding-block: 4px;
     padding-inline: 10px;
-    font-size: large;
+    font-size: medium;
   }
   .navbar-right li{
     transition: box-shadow .20s ease-in-out;
