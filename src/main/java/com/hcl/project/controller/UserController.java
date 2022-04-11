@@ -1,7 +1,6 @@
 package com.hcl.project.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -49,7 +48,17 @@ public class UserController {
 			
 		}catch (DataAccessException e) {
 			System.out.println(">> JDBC ERROR: "+e.getMessage());
-			model.addObject("errorMsg", e.getMostSpecificCause());
+			String error = e.getMostSpecificCause().toString();
+			
+			if(error.contains("java.sql.SQLIntegrityConstraintViolationException") && error.contains("USERS_EMAIL_UK")) {
+				model.addObject("errorMsg", "your email is already exists.");
+				
+			}else if(error.contains("java.sql.SQLIntegrityConstraintViolationException") && error.contains("USERS_MOBILE_UK")) {
+				model.addObject("errorMsg", "your mobile is already exists.");
+			}
+			else {
+				model.addObject("errorMsg", e.getMostSpecificCause());
+			}
 			
 		}catch (Exception e) {
 			System.out.println(">> ERROR: "+e.getMessage());

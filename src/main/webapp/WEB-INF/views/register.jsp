@@ -108,11 +108,9 @@
                             </div>
                         </div>
                         
-                        <div class="row col-12">
-                        	<c:if test="${not empty errorMsg}"><div class="alert alert-danger alert-dismissible py-1 my-2">${errorMsg}</div></c:if>
-                			<c:if test="${not empty successMsg}"><div class="alert alert-success alert-dismissible py-1 my-2">${successMsg}</div></c:if>
-                  		</div>
-                        
+                       	<c:if test="${not empty errorMsg}"><div class="alert alert-danger alert-dismissible py-1 my-2">${errorMsg}</div></c:if>
+               			<c:if test="${not empty successMsg}"><div class="alert alert-success alert-dismissible py-1 my-2">${successMsg}</div></c:if>
+                       
                     </form:form>
                     
                     <div class="divider d-flex align-items-center my-4">
