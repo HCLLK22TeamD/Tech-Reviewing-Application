@@ -4,9 +4,8 @@
 
 
 
-
   <!-- Footer -->
-  <footer class="bg-light text-muted mt-5">
+  <footer class="bg-light text-muted mt-5 " style="">
 
     <section class="border-top">
       <div class="container mt-4">
@@ -17,8 +16,8 @@
               <div><span class="text-dark">T</span>ech<span class="text-dark font-weight-bold">ZONE</span></div>
             </h6>
             <p class="mb-0">
-              This is a simple web application project desiged for HCL training program which deveoped acording to
-              Spring Web MVC architecture.
+              TechZONE is a Tech-Reviewing web application project designed for HCL training program which developed according to the
+              Spring Web MVC Architecture.
             </p>
           </div>      
 
