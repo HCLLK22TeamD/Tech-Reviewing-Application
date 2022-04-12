@@ -8,11 +8,14 @@ import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.hcl.project.dao.PostDAO;
 import com.hcl.project.mapper.PostMapper;
+import com.hcl.project.mapper.UserPostMapper;
 import com.hcl.project.model.Post;
+import com.hcl.project.model.UserPost;
 
 public class PostDAOImpl implements PostDAO{
 	
@@ -72,7 +75,6 @@ public class PostDAOImpl implements PostDAO{
 			return true;
 			
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			System.out.println(">> ERROR: "+e.getMessage());
 			return false;
 		}
@@ -117,5 +119,103 @@ public class PostDAOImpl implements PostDAO{
 			return false;
 		}
 	}
+
+	
+//	handle likes , favorite, views
+	
+	@Override
+	public Boolean changeLike(int id, int userId, int views) {
+		
+		String queryFind = "SELECT * FROM user_post where user_id = ? and post_id = ?";
+		String queryUpdate = "UPDATE user_post set is_like = ? where user_id = ? and post_id = ?";
+		String queryInsert = "INSERT INTO user_post (user_id, post_id, is_like, is_favorite) VALUES (?, ?, ?, ?)";
+		
+		try {
+			UserPost userPost = (UserPost) jdbcTemplate.queryForObject(queryFind, new UserPostMapper(), userId, id);
+			
+			Object[] params = new Object[] {!userPost.getIsLike(), userId, id};
+			int result = jdbcTemplate.update(queryUpdate, params);
+			
+			if(result > 0) {
+				if(userPost.getIsLike()) {
+					views++;
+				}else {
+					views--;
+				}
+				calcViews(id, views);
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch (EmptyResultDataAccessException e) {
+			Object[] params = new Object[] {userId, id, true, false};
+			int result = jdbcTemplate.update(queryInsert, params);
+			if(result > 0) {
+				views++;
+				calcViews(id, views);
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch (DataAccessException e) {
+			System.out.println(">> JDBC ERROR: "+e.getMostSpecificCause());
+			return false;
+		}
+	}
+	
+	
+	public Boolean calcViews(int id, int views) {
+		String query = "UPDATE posts SET likes = ?, views = ? WHERE post_id = ?";
+		Object[] params = new Object[] {views, views, id};
+		int result = jdbcTemplate.update(query, params);
+		if(result > 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
+	@Override
+	public Boolean changeFavorite(int id, int userId) {
+		String queryFind = "SELECT * FROM user_post where user_id = ? and post_id = ?";
+		String queryUpdate = "UPDATE user_post set is_favorite = ? where user_id = ? and post_id = ?";
+		String queryInsert = "INSERT INTO user_post (user_id, post_id, is_like, is_favorite) VALUES (?, ?, ?, ?)";
+		
+		try {
+			UserPost userPost = (UserPost) jdbcTemplate.queryForObject(queryFind, new UserPostMapper(), userId, id);
+			
+			Object[] params = new Object[] {!userPost.getIsFavorite(), userId, id};
+			int result = jdbcTemplate.update(queryUpdate, params);
+			if(result > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch (EmptyResultDataAccessException e) {
+			Object[] params = new Object[] {userId, id, false, true};
+			int result = jdbcTemplate.update(queryInsert, params);
+			if(result > 0) {
+				return true;
+			}else {
+				return false;
+			}
+			
+		}catch (DataAccessException e) {
+			System.out.println(">> JDBC ERROR: "+e.getMostSpecificCause());
+			return false;
+		}
+	}
+
+	@Override
+	public UserPost getUserPost(int id, int userId) {
+		String query = "SELECT * FROM user_post WHERE user_id = ? and post_id = ?";
+		Object[] params = new Object[] {userId, id};
+		return jdbcTemplate.queryForObject(query, new UserPostMapper(), params);
+	}
+	
+	
 
 }

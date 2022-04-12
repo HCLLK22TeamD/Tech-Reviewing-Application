@@ -180,10 +180,9 @@ public class Post {
 	@Override
 	public String toString() {
 		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", category=" + category
-				+ ", subCategory=" + subCategory + ", cover=" + cover + ", author=" + author + ", likes=" + likes
-				+ ", views=" + views + ", comments=" + comments + ", hasAirDate=" + hasAirDate + ", airDate=" + airDate
-				+ ", createdAt=" + createdAt + "]";
+				+ ", subCategory=" + subCategory + ", cover=" + cover + ", coverImage=" + coverImage + ", author="
+				+ author + ", isLike=" + likes + ", views=" + views + ", comments="
+				+ comments + ", hasAirDate=" + hasAirDate + ", airDate=" + airDate + ", createdAt=" + createdAt + "]";
 	}
-
 
 }

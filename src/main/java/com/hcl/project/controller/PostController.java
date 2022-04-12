@@ -8,9 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +26,7 @@ import com.hcl.project.exceptions.PostValidationException;
 import com.hcl.project.model.Comment;
 import com.hcl.project.model.Post;
 import com.hcl.project.model.User;
+import com.hcl.project.model.UserPost;
 
 @Controller
 @RequestMapping("/posts")
@@ -105,8 +108,9 @@ public class PostController {
 	
 	
 	@RequestMapping("/view")
-	public ModelAndView showPost(@RequestParam int id, ModelAndView model) {
+	public ModelAndView showPost(@RequestParam int id, ModelAndView model, HttpSession session) {
 		System.out.println("post id:"+id);
+		User currentUser = (User) session.getAttribute("user");
 		model.setViewName("post");
 		try {
 			Post post = postDAO.getPostById(id);
@@ -117,9 +121,23 @@ public class PostController {
 				List<Comment> commentList = commentDAO.getAllComments(id);
 				model.addObject("commentList", commentList);
 				
+				try {
+					UserPost userPost = postDAO.getUserPost(id, currentUser.getId());
+					model.addObject("isLike", userPost.getIsLike());
+					model.addObject("isFavorite", userPost.getIsFavorite());
+
+				}catch (EmptyResultDataAccessException e) {
+					model.addObject("isLike", false);
+					model.addObject("isFavorite", false);
+					
+				}catch (Exception e) {
+					System.out.println(">> USER-POST JDBC ERROR: "+e.getMessage());
+					model.addObject("errorMsg", "please, login first before add like or comment ot this post.");
+				}
+				
 			}catch (DataAccessException e) {
 				System.out.println(">> JDBC ERROR: "+e.getMessage());
-				model.addObject("errorMsg", "the author of the post cannot be found.");
+				model.addObject("errorMsg", "the author of the post no longer available.");
 			}
 			model.addObject("post", post);
 			
@@ -129,6 +147,31 @@ public class PostController {
 		}
 		
 		model.addObject("comment", new Comment());
+		return model;
+	}
+	
+	
+	@RequestMapping("/view/{id}/like")
+	public ModelAndView addLike(@PathVariable int id, @RequestParam("v") int views,  ModelAndView model, HttpSession session) {
+		User currentUser = (User) session.getAttribute("user");
+		try {
+			postDAO.changeLike(id, currentUser.getId(), views);
+		}catch (Exception e) {
+			model.addObject("errorMsg", "login is required to add like to this post.");
+		}
+		model.setViewName("redirect:/posts/view?id="+id);
+		return model;
+	}
+	
+	@RequestMapping("/view/{id}/favorite")
+	public ModelAndView addFavorite(@PathVariable int id, ModelAndView model, HttpSession session) {
+		User currentUser = (User) session.getAttribute("user");
+		try {
+			postDAO.changeFavorite(id, currentUser.getId());
+		}catch (Exception e) {
+			model.addObject("errorMsg", "login is required to add favorite this post.");
+		}
+		model.setViewName("redirect:/posts/view?id="+id);
 		return model;
 	}
 	

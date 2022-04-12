@@ -36,7 +36,7 @@ public class CommentController {
 			System.out.println("comment success:"+success);
 			
 		}else {
-			model.addObject("commnetErrorMsg", "please login before commenting.");
+			model.addObject("commnetErrorMsg", "login is required to add comments.");
 		}
 		
 		return model;
