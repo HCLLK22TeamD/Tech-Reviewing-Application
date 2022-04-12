@@ -1,6 +1,6 @@
-# Tech-Reviewing-Application
+# Tech-Reviewing-Application (TechZONE)
 
-This is a simple web application project desiged for HCL training program which deveoped acording to Spring Web MVC architecture.
+TechZONE is a Tech-Reviewing web application project designed for HCL training program which developed according to the Spring Web MVC Architecture.
 
 #### Application Scenario -
 User can registered to the system as a noramal user (Tech Reader) or as a Publisher.
