@@ -82,6 +82,8 @@
 				<h2 class="mb-2 lead">Recent Posts</h2>
 
 				<div class="row">
+				
+					<c:if test="${empty postList}"> <div class="col-12 alert alert-info py-4 mt-2 text-center">There no any recent post yet.</div></c:if>
 
 					<c:forEach var="post" items="${postList}" varStatus="item">
 					
@@ -95,12 +97,16 @@
 									<div class="post-meta">
 										<a class="post-category cat-1 bg-success mr-0" href="category.html">${post.category}</a>
 										<a class="post-category cat-1 bg-warning" href="category.html">${post.subCategory}</a>
+										
 										<div class="like-views text-primary pull-right">
-											<i class="btn btn-sm px-0 fa fa-heart-o "></i> <i
-												class="btn btn-sm px-0 fa fa-star-o"></i> <span
-												class="border px-1 small border-primary">0 <i
-												class="fa fa-eye"></i></span>
+										 	
+										 	<i class="btn btn-sm px-0 fa fa-heart-o text-danger"></i>
+										 	<i class="btn btn-sm px-0 fa fa-star-o"></i>
+										 
+											<span class="border px-1 small border-primary">${post.views}
+											<i class="fa fa-eye"></i></span>
 										</div>
+										
 									</div>
 									<h3 class="pt-3 post-title small">
 										<a href="<%=request.getContextPath() %>/posts/view?id=${post.id}">${post.title}</a>

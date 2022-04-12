@@ -58,7 +58,7 @@ INSERT INTO user_roles (username, type) VALUES ('admin@hcl.com', 'ROLE_ADMIN');
 CREATE SEQUENCE post_seq START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE posts (
-	post_id VARCHAR2(10) NOT NULL,
+	post_id NUMBER(10) NOT NULL,
 	title VARCHAR2(200) NOT NULL,
 	content LONG NOT NULL,
 	category VARCHAR2(50) NOT NULL,
@@ -125,3 +125,16 @@ CREATE OR REPLACE TRIGGER comments_seq_trig
 BEGIN
 	SELECT comments_seq.NEXTVAL INTO :NEW.id FROM DUAL;
 END;
+
+
+--------- user_posts table ------------------------------
+
+CREATE TABLE user_post (
+	user_id NUMBER(10) NOT NULL,
+	post_id NUMBER(10) NOT NULL,
+	is_like CHAR(1),
+	is_favorite CHAR(10),
+	CONSTRAINT user_post_uk UNIQUE (user_id, post_id),
+	CONSTRAINT user_post_user_fk FOREIGN KEY (user_id) REFERENCES users(id),
+	CONSTRAINT user_post_post_fk FOREIGN KEY (post_id) REFERENCES posts(post_id)
+);

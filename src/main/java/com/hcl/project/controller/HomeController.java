@@ -22,7 +22,6 @@ public class HomeController {
 	public ModelAndView getAllPosts(ModelAndView model) {
 		try {
 			List<Post> postList = postDAO.getAllPosts();
-			System.out.println("post list: "+ postList);
 			model.addObject("postList", postList);
 			
 		}catch (DataAccessException e) {

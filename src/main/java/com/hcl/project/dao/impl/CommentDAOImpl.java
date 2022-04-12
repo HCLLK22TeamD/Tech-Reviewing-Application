@@ -41,7 +41,7 @@ public class CommentDAOImpl implements CommentDAO{
 
 	@Override
 	public List<Comment> getAllComments(int postId) {
-		String query = "SELECT * FROM comments WHERE post_id = ?";
+		String query = "SELECT * FROM comments WHERE post_id = ? ORDER BY id DESC";
 		return jdbcTemplate.query(query, new CommentMapper(), postId);	
 	}
 
