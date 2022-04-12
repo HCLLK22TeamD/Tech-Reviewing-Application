@@ -16,16 +16,19 @@ Also users can see upcomming Air-Dates about specific technology or gadget or pr
 
 #### Routes
 
-/home - home page <br>
-/calendar - Airdates calendar page <br>
-/user/login - login page <br>
-/user/register - registration interface <br>
-/user/profile - user account page <br><br>
-/posts/new-post - creat a post <br>
-/posts/manage - manage published posts <br>
-/posts/update?id={id} - update specific post <br>
-/posts/delete?id={id} - delete specifc post <br>
-/posts/view?id={id} - view specifc post <br>
+```
+/home - home page
+/calendar - Airdates calendar page
+/user/login - login page
+/user/register - registration interface
+/user/profile - user account page
+/posts/new-post - creat a post
+/posts/manage - manage published posts
+/posts/update?id={id} - update specific post
+/posts/delete?id={id} - delete specifc post
+/posts/view?id={id} - view specifc post
+```
+
 
 
 ### How To Run
